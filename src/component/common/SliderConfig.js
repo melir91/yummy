@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 import {NotificationManager} from 'react-notifications';
 import requester from '../../infrastructure/requester';
 import Image from '../common/SliderConfigImage';
@@ -54,12 +55,18 @@ export default class SLiderConfig extends Component {
     componentDidMount = () => this.getRecipes();
 
 
-    render = () => (
-        <div>
-            <h1>Slider Configuration</h1>
-            <section id="SlideConfig" className="container">
-                {this.state.recipes.map( (r) => <Image key={r._id} {...r} modify={this.modifySlider} />)}
-            </section>
-        </div>
-    );
+    render = () => {
+        if ((sessionStorage.getItem('dummyUser') || !sessionStorage.getItem('authtoken'))) {
+            return <Redirect to='/' />
+        } else {
+            return (
+                <div>
+                    <h1>Slider Configuration</h1>
+                    <section id="SlideConfig" className="container">
+                        {this.state.recipes.map( (r) => <Image key={r._id} {...r} modify={this.modifySlider} />)}
+                    </section>
+                </div>
+            );
+        }
+    }
 }

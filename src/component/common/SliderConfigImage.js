@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-const NO_IMG_URL = 'https://www.tabithaknowel.com/integrated/uploads/2017/05/noPhotoFound.png';
+const NO_IMG_URL = 'http://sdi-total.com/cms/wp-content/themes/SDI/img/noimage.png';
 
 export default class SliderConfigImage extends Component {
 

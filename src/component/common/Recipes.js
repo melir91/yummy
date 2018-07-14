@@ -4,7 +4,7 @@ import requester from '../../infrastructure/requester';
 import Recipe from './Recipe';
 import EditForm from '../forms/EditForm';
 
-const NO_IMG_URL = 'https://www.tabithaknowel.com/integrated/uploads/2017/05/noPhotoFound.png';
+const NO_IMG_URL = 'http://sdi-total.com/cms/wp-content/themes/SDI/img/noimage.png';
 
 export default class Recipes extends Component {
     constructor(props) {

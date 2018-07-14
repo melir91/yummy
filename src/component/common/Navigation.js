@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
+import {NotificationManager} from 'react-notifications';
+import requester from '../../infrastructure/requester';
 import observer from '../../infrastructure/observer';
 
 export default class Navigation extends Component {
@@ -16,6 +18,8 @@ export default class Navigation extends Component {
     setUserLoggedIn = () => this.setState({ loginUser: true });
 
     logout = () => {
+        requester.post('user', '_logout', 'kinvey')
+            .then(NotificationManager.success('You can continue read as a guest', 'You was successfully logout'));
         this.setState({ loginUser: false});
         sessionStorage.clear();
     }

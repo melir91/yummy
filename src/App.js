@@ -26,7 +26,6 @@ class App extends React.Component {
         <Route path='/login' component={LoginForm} />
         <Route path='/register' component={RegisterForm} />
         <Route path='/create' component={RecipeForm} />
-        <Route path='/test' component={Notification} />
       </div>
     );
   }

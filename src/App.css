@@ -57,7 +57,7 @@ form h2 {
 
 .carousel-inner>.item>img {
   width: 100%;
-  height: 900px;
+  height: 620px;
 }
 
 .carousel-caption>h3 {
@@ -91,7 +91,7 @@ span.alert-danger {
 }
 
 #MyInfo {
-width: 50%;
+  width: 100%;
   padding: 0 10%;
   display: inline-block;
 }
@@ -105,16 +105,18 @@ width: 50%;
   position: static;
 }
 
+#SlideConfig {
+  margin-top: 50px;
+}
+
 #SlideConfig .recipe {
   display: inline-block;
-  width: 33%;
+  width: 25%;
 }
 
 #SlideConfig .recipe img {
   float: none;
-}
-
-#SlideConfig .recipe img {
+  height: auto;
   background-color: #ff0000;
 }
 
@@ -127,8 +129,8 @@ width: 50%;
 }
 
 .modal-body img {
-  width: 500px;
-  margin-bottom: 50px;
+  width: 400px;
+  margin-bottom: 30px;
 }
 
 .modal-body .details {

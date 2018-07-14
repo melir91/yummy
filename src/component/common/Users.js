@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 import {NotificationManager} from 'react-notifications';
 import requester from '../../infrastructure/requester';
 
@@ -51,39 +52,43 @@ export default class Users extends Component {
     }
 
     render() {
-        return (
-            <section id="MyAccount">
-                <h1>Registered users</h1>
+        if (!sessionStorage.getItem('admin')) {
+            return <Redirect to='/' />
+        } else {
+            return (
+                <section id="MyAccount">
+                    <h1>Registered users</h1>
 
-                <div id="MyInfo">
-                    <table className="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nickname</th>
-                                <th scope="col">ID</th>
-                                <th scope="col">Role</th>
-                                <th scope="col">Delete</th>
-                                <th scope="col">Give access</th>
-                            </tr>
-                        </thead>
-                        <tbody className="users">
-                            {this.state.users.map((user, index) => {
-                                return (
-                                    <tr key={index} className={'roles' in user._kmd && user._kmd.roles[0].roleId === ADMIN_ROLE_ID ? 'admin' : ''}>
-                                    <th scope="row">{index + 1}</th>
-                                        <td>{user.username}</td>
-                                        <td>{user._id}</td>
-                                        <td>{'roles' in user._kmd && user._kmd.roles[0].roleId === ADMIN_ROLE_ID ? 'Admin' : 'User'}</td>
-                                        <td><button className="delete btn btn-danger" onClick={() => this.deleteUser(user._id)}>Delete</button></td>
-                                        <td><button className="give-access btn btn-warning" onClick={() => this.makeAdmin(user._id)}>Make Admin</button></td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-        );
+                    <div id="MyInfo">
+                        <table className="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nickname</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Role</th>
+                                    <th scope="col">Delete</th>
+                                    <th scope="col">Give access</th>
+                                </tr>
+                            </thead>
+                            <tbody className="users">
+                                {this.state.users.map((user, index) => {
+                                    return (
+                                        <tr key={index} className={'roles' in user._kmd && user._kmd.roles[0].roleId === ADMIN_ROLE_ID ? 'admin' : ''}>
+                                        <th scope="row">{index + 1}</th>
+                                            <td>{user.username}</td>
+                                            <td>{user._id}</td>
+                                            <td>{'roles' in user._kmd && user._kmd.roles[0].roleId === ADMIN_ROLE_ID ? 'Admin' : 'User'}</td>
+                                            <td><button className="delete btn btn-danger" onClick={() => this.deleteUser(user._id)}>Delete</button></td>
+                                            <td><button className="give-access btn btn-warning" onClick={() => this.makeAdmin(user._id)}>Make Admin</button></td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            );
+        }
     }
 }
