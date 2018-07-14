@@ -16,6 +16,14 @@ export default class Users extends Component {
     retrieveCustomers = () =>
         requester.get('user', '', 'kinvey')
             .then(response => {
+                //filted deleted users
+                response = response.filter(function(user){
+                    return (!('status' in user._kmd)) || (
+                        ('status' in user._kmd) &&
+                        ('val' in user._kmd.status) &&
+                        user._kmd.status.val !== 'disabled'
+                    );
+                });
                 this.setState({
                     users: response
                 })
@@ -34,7 +42,7 @@ export default class Users extends Component {
 
     makeAdmin = (userId) => {
         const endpoint = userId + '/roles/' + ADMIN_ROLE_ID;
-        requester.update('user', endpoint, 'kinvey')
+        requester.update('user', endpoint, 'master')
             .then(response => {
                 NotificationManager.success('Please be careful when you give permisions to users!', 'This user was promoted to admin');
                 this.retrieveCustomers();
@@ -63,7 +71,7 @@ export default class Users extends Component {
                             {this.state.users.map((user, index) => {
                                 return (
                                     <tr key={index} className={'roles' in user._kmd && user._kmd.roles[0].roleId === ADMIN_ROLE_ID ? 'admin' : ''}>
-                                    <th scope="row">{index}</th>
+                                    <th scope="row">{index + 1}</th>
                                         <td>{user.username}</td>
                                         <td>{user._id}</td>
                                         <td>{'roles' in user._kmd && user._kmd.roles[0].roleId === ADMIN_ROLE_ID ? 'Admin' : 'User'}</td>
