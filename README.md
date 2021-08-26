@@ -1,4 +1,4 @@
-Official repo: https://github.com/Melir91/Yummy
+Official repo: https://github.com/melir91/yummy
 
 React application about posting recipes.
 
